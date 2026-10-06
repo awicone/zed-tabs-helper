@@ -24,7 +24,7 @@ The normal quit/relaunch workaround was tested locally with Zed 1.22.0. Startup 
 
 ## Download the app
 
-Get the universal `.app` ZIP from [Releases](https://github.com/awicone/zed-tabs-helper/releases/latest). No compiler or Python is needed. Follow the included [quick-start guide](QUICKSTART.md) to install it, grant Accessibility access, and enable login startup. The app is ad-hoc signed, not Apple-notarized.
+Download [Zed Tabs Helper 0.1.0 for Apple Silicon and Intel](https://github.com/awicone/zed-tabs-helper/raw/refs/heads/main/downloads/Zed-Tabs-Helper-0.1.0-universal.zip). The SHA-256 checksum is in [downloads/SHA256SUMS.txt](downloads/SHA256SUMS.txt). No compiler or Python is needed. Follow the included [quick-start guide](QUICKSTART.md) to install it, grant Accessibility access, and enable login startup. The app is ad-hoc signed, not Apple-notarized.
 
 ## Install from source
 
@@ -116,7 +116,7 @@ The self-test checks settings editing on sample strings without touching your co
 
 ## Build a release
 
-Run `python3 package.py 0.1.0` on macOS to build and verify a universal app archive in `dist/`. The script does not install or launch the helper UI. Pushing a version tag such as `v0.1.0` runs the same build in GitHub Actions and publishes the archive and checksum in Releases. Update `RELEASE_NOTES.md` before tagging a new version.
+Run `python3 package.py 0.1.0` on macOS to build and verify a universal app archive in `dist/`. The script does not install or launch the helper UI. The included GitHub Actions workflow is configured to publish version tags in Releases. The first tag did not start a run, so the verified local build is provided in `downloads/` until automated publishing is confirmed. Update `RELEASE_NOTES.md` before tagging a new version.
 
 ## License
 
