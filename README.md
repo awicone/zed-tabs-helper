@@ -9,7 +9,7 @@ Built for [zed-industries/zed#49724](https://github.com/zed-industries/zed/issue
 - Watches for Zed to start, toggles system tabs, and requests **Window → Merge All Windows** when Zed is in the foreground.
 - Enables Zed's quit confirmation. When you choose Quit or press Cmd+Q, the helper recognizes that exact confirmation, disables system tabs, waits briefly, and presses Quit for you.
 - Leaves system tabs disabled while Zed is closed and sets `restore_on_startup` to `last_session`.
-- Runs at login and adds a small `Z↔` menu bar item. No separate launch or quit scripts to click.
+- Can run at login and adds a small `Z↔` menu bar item. No separate launch or quit scripts to click.
 
 It never confirms Save/Discard dialogs. It does not read your source files, edit Zed's database, or make network requests. Accessibility access is used to inspect Zed's windows and operate its quit confirmation and Window menu.
 
@@ -17,12 +17,16 @@ It never confirms Save/Discard dialogs. It does not read your source files, edit
 
 - macOS and the stable Zed app (`dev.zed.Zed`).
 - English Zed menu and dialog labels.
-- Xcode Command Line Tools with a recent Swift compiler, plus Python 3 for installation.
+- For building from source only: Xcode Command Line Tools with a recent Swift compiler, plus Python 3 for installation.
 - Zed settings at `~/.config/zed/settings.json`.
 
 The normal quit/relaunch workaround was tested locally with Zed 1.22.0. Startup timings depend on the machine and project; this has not been tested across all macOS or Zed versions.
 
-## Install
+## Download the app
+
+Get the universal `.app` ZIP from [Releases](https://github.com/awicone/zed-tabs-helper/releases/latest). No compiler or Python is needed. Follow the included [quick-start guide](QUICKSTART.md) to install it, grant Accessibility access, and enable login startup. The app is ad-hoc signed, not Apple-notarized.
+
+## Install from source
 
 Clone this repository, then build and install:
 
@@ -109,6 +113,10 @@ This stops the login agent, disables system tabs and quit confirmation, and move
 ```
 
 The self-test checks settings editing on sample strings without touching your configuration. The probe reports Accessibility permission and whether Zed is running. A complete UI test still requires trying Quit and relaunch with real Zed windows.
+
+## Build a release
+
+Run `python3 package.py 0.1.0` on macOS to build and verify a universal app archive in `dist/`. The script does not install or launch the helper UI. Pushing a version tag such as `v0.1.0` runs the same build in GitHub Actions and publishes the archive and checksum in Releases. Update `RELEASE_NOTES.md` before tagging a new version.
 
 ## License
 

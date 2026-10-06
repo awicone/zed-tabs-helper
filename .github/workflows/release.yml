@@ -1,0 +1,30 @@
+name: Build macOS release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out the tagged source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Build and verify the universal app
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: python3 package.py "${RELEASE_TAG#v}"
+      - name: Publish the app and checksum
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: >-
+          gh release create "$RELEASE_TAG" dist/*.zip dist/SHA256SUMS.txt
+          --verify-tag --title "Zed Tabs Helper $RELEASE_TAG"
+          --notes-file RELEASE_NOTES.md
